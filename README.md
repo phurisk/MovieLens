@@ -22,7 +22,6 @@ A full-stack movie web application that uses the [MovieLens dataset](https://gro
 - ✅ View a paginated list of movies from MovieLens
 - ✅ Filter movies by title or genre
 - ✅ View detailed movie info
-- ✅ Get recommended movies by genre
 - ✅ Dynamically load movie posters from TMDB via `tmdbId`
 
 ---
