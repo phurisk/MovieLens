@@ -606,11 +606,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/phu/Desktop/MovieLens/RazorBackend/RazorBackend.csproj",
+      "projectUniqueName": "/home/phu/Desktop/All_Project/MovieLens/ASP-NETCoreBackend/RazorBackend.csproj",
       "projectName": "RazorBackend",
-      "projectPath": "/home/phu/Desktop/MovieLens/RazorBackend/RazorBackend.csproj",
+      "projectPath": "/home/phu/Desktop/All_Project/MovieLens/ASP-NETCoreBackend/RazorBackend.csproj",
       "packagesPath": "/home/phu/.nuget/packages/",
-      "outputPath": "/home/phu/Desktop/MovieLens/RazorBackend/obj/",
+      "outputPath": "/home/phu/Desktop/All_Project/MovieLens/ASP-NETCoreBackend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/phu/.nuget/NuGet/NuGet.Config"
@@ -661,7 +661,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.115/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.117/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

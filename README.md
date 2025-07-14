@@ -29,6 +29,9 @@ A full-stack movie web application that uses the [MovieLens dataset](https://gro
 
 ## ⚙️ Backend Setup (ASP.NET Core)
 
+## How to start
+`Dotnet run`
+
 ### Step 1: Import MovieLens data
 - Import data from CSV files (`movies.csv`, `links.csv`, `ratings.csv`)
 - Store them in memory or database

@@ -9,43 +9,43 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = RazorBackend
 build_property.RootNamespace = RazorBackend
-build_property.ProjectDir = /home/phu/Desktop/MovieLens/RazorBackend/
+build_property.ProjectDir = /home/phu/Desktop/All_Project/MovieLens/ASP-NETCoreBackend/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /home/phu/Desktop/MovieLens/RazorBackend
+build_property.MSBuildProjectDirectory = /home/phu/Desktop/All_Project/MovieLens/ASP-NETCoreBackend
 build_property._RazorSourceGeneratorDebug = 
 
-[/home/phu/Desktop/MovieLens/RazorBackend/Pages/Error.cshtml]
+[/home/phu/Desktop/All_Project/MovieLens/ASP-NETCoreBackend/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/phu/Desktop/MovieLens/RazorBackend/Pages/Index.cshtml]
+[/home/phu/Desktop/All_Project/MovieLens/ASP-NETCoreBackend/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/phu/Desktop/MovieLens/RazorBackend/Pages/Privacy.cshtml]
+[/home/phu/Desktop/All_Project/MovieLens/ASP-NETCoreBackend/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/phu/Desktop/MovieLens/RazorBackend/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[/home/phu/Desktop/All_Project/MovieLens/ASP-NETCoreBackend/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/phu/Desktop/MovieLens/RazorBackend/Pages/_ViewImports.cshtml]
+[/home/phu/Desktop/All_Project/MovieLens/ASP-NETCoreBackend/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/phu/Desktop/MovieLens/RazorBackend/Pages/_ViewStart.cshtml]
+[/home/phu/Desktop/All_Project/MovieLens/ASP-NETCoreBackend/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/phu/Desktop/MovieLens/RazorBackend/Views/Shared/_Layout.cshtml]
+[/home/phu/Desktop/All_Project/MovieLens/ASP-NETCoreBackend/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/phu/Desktop/MovieLens/RazorBackend/Pages/Shared/_Layout.cshtml]
+[/home/phu/Desktop/All_Project/MovieLens/ASP-NETCoreBackend/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-2gug27pbml

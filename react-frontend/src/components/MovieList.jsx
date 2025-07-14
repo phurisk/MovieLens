@@ -175,130 +175,417 @@ const MovieList = () => {
 
 
     return (
-        <div className="container-fluid bg-dark text-light p-4">
-        <div className="row mb-4">
-            <div className="col-md-12">
-            <input
-                id="search-input"
-                type="text"
-                placeholder="Search by title or genre"
-                value={filter}
-                onChange={handleFilterChange}
-                className="form-control form-control-lg mb-4 border-0 rounded-pill shadow-sm"
-                style={{ backgroundColor: '#2c3e50', color: 'white'}}
-            />
-            </div>
-        </div>
+<div 
+  className="container-fluid text-light p-4"
+  style={{
+    minHeight: '100vh'
+  }}
+>
+  {/* Search Input */}
+  <div className="row mb-4">
+    <div className="col-md-12">
+      <div 
+        className="position-relative"
+        style={{ animation: 'fadeInDown 0.8s ease-out' }}
+      >
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search by title or genre..."
+          value={filter}
+          onChange={handleFilterChange}
+          className="form-control form-control-lg mb-4 border-0 rounded-pill shadow-lg"
+          style={{ 
+            background: 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)',
+            color: 'white',
+            paddingLeft: '50px',
+            paddingRight: '20px',
+            fontSize: '1.1rem',
+            transition: 'all 0.3s ease',
+            backdropFilter: 'blur(10px)',
+            border: '2px solid transparent'
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = '#3498db';
+            e.target.style.boxShadow = '0 0 20px rgba(52, 152, 219, 0.3)';
+            e.target.style.transform = 'translateY(-2px)';
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = 'transparent';
+            e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+            e.target.style.transform = 'translateY(0)';
+          }}
+        />
+        <i 
+          className="bi bi-search position-absolute text-secondary"
+          style={{
+            left: '20px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            fontSize: '1.2rem',
+            zIndex: 10
+          }}
+        />
+      </div>
+    </div>
+  </div>
 
-        {/* Genre Selection */}
-        <div className="row mb-4">
-            <div className="col-md-12">
-            <select
-                onChange={handleGenreSelect}
-                className="form-control form-control-lg mb-4 border-0 rounded-pill shadow-sm"
-                style={{ backgroundColor: '#2c3e50', color: 'white' }}
+  {/* Genre Selection */}
+  <div className="row mb-4">
+    <div className="col-md-12">
+      <div 
+        className="position-relative"
+        style={{ animation: 'fadeInDown 0.8s ease-out 0.2s both' }}
+      >
+        <select
+          onChange={handleGenreSelect}
+          className="form-control form-control-lg mb-4 border-0 rounded-pill shadow-lg"
+          style={{ 
+            background: 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)',
+            color: 'white',
+            fontSize: '1.1rem',
+            paddingLeft: '50px',
+            transition: 'all 0.3s ease',
+            backdropFilter: 'blur(10px)',
+            border: '2px solid transparent',
+            cursor: 'pointer'
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = '#e74c3c';
+            e.target.style.boxShadow = '0 0 20px rgba(231, 76, 60, 0.3)';
+            e.target.style.transform = 'translateY(-2px)';
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = 'transparent';
+            e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+            e.target.style.transform = 'translateY(0)';
+          }}
+        >
+          <option value="" style={{ backgroundColor: '#2c3e50', color: 'white' }}>Select Genre</option>
+          {['Action', 'Comedy', 'Drama', 'Romance', 'Thriller', 'Adventure'].map(genre => (
+            <option 
+              key={genre} 
+              value={genre}
+              style={{ backgroundColor: '#2c3e50', color: 'white' }}
             >
-                <option value="">Select Genre</option>
-                {['Action', 'Comedy', 'Drama', 'Romance', 'Thriller', 'Adventure'].map(genre => (
-                <option key={genre} value={genre}>{genre}</option>
-                ))}
-            </select>
-            </div>
-        </div>
+              {genre}
+            </option>
+          ))}
+        </select>
+        <i 
+          className="bi bi-funnel position-absolute text-secondary"
+          style={{
+            left: '20px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            fontSize: '1.2rem',
+            zIndex: 10
+          }}
+        />
+      </div>
+    </div>
+  </div>
 
-        {/* Rating Selection
-        <div className="row mb-4">
-            <div className="col-md-12">
-            <input
-                type="number"
-                min="0"
-                max="5"
-                value={minRating}
-                onChange={handleRatingSelect}
-                className="form-control form-control-lg mb-4 border-0 rounded-pill shadow-sm"
-                style={{ backgroundColor: '#2c3e50', color: 'white' }}
-                placeholder="Min Rating (0-5)"
+  {/* Filtered Movies */}
+  <div className="row">
+    {getPaginatedMovies().map((movie, index) => (
+      <div 
+        key={movie.movieId} 
+        className="col-md-3 mb-4" 
+        onClick={() => handleMovieClick(movie.movieId)}
+        style={{ 
+          animation: `slideInUp 0.6s ease-out ${index * 0.1}s both`,
+          cursor: 'pointer'
+        }}
+      >
+        <div 
+          className="card text-light rounded-lg shadow-lg h-100"
+          style={{ 
+            background: 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            transition: 'all 0.4s ease',
+            backdropFilter: 'blur(10px)',
+            overflow: 'hidden'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-10px) scale(1.02)';
+            e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
+            e.currentTarget.style.borderColor = 'rgba(52, 152, 219, 0.5)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0) scale(1)';
+            e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+          }}
+        >
+          <div className="position-relative overflow-hidden">
+            <img
+              src={posterUrls[movie.movieId] || 'fallback.jpg'}
+              alt={movie.title}
+              className="card-img-top"
+              style={{ 
+                height: '250px', 
+                objectFit: 'cover',
+                transition: 'transform 0.4s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'scale(1)';
+              }}
             />
+            <div 
+              className="position-absolute top-0 start-0 w-100 h-100"
+              style={{
+                background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%)',
+                opacity: 0,
+                transition: 'opacity 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.opacity = '1';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.opacity = '0';
+              }}
+            />
+          </div>
+          
+          <div className="card-body p-3">
+            <h5 
+              className="card-title text-white fw-bold mb-3"
+              style={{
+                fontSize: '1.1rem',
+                lineHeight: '1.3',
+                textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)'
+              }}
+            >
+              {movie.title}
+            </h5>
+            <div className="d-flex flex-wrap gap-1">
+              {movie.genres.split('|').map((genre, genreIndex) => (
+                <span 
+                  key={genreIndex} 
+                  className="badge text-dark"
+                  style={{
+                    background: 'linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%)',
+                    fontSize: '0.75rem',
+                    padding: '4px 8px',
+                    borderRadius: '12px',
+                    animation: `fadeInScale 0.5s ease-out ${genreIndex * 0.1}s both`,
+                    transition: 'all 0.3s ease',
+                    cursor: 'pointer'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.transform = 'scale(1.1)';
+                    e.target.style.background = 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)';
+                    e.target.style.color = 'white';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.transform = 'scale(1)';
+                    e.target.style.background = 'linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%)';
+                    e.target.style.color = '#2c3e50';
+                  }}
+                >
+                  {genre}
+                </span>
+              ))}
             </div>
-        </div> */}
-
-        {/* Recommended Movies
-        <div className="mb-4">
-            <h3 className="text-primary">Recommended Movies:</h3>
-            <div className="row">
-            {recommendedMovies.map(movie => (
-                <div key={movie.movieId} className="col-md-3 mb-4" onClick={() => handleMovieClick(movie.movieId)}>
-                <div className="card bg-secondary text-light rounded-lg shadow-sm">
-                    <img 
-                    src={posterUrls[movie.movieId] || 'fallback.jpg'} 
-                    alt={movie.title} 
-                    className="card-img-top rounded-top"
-                    />
-                    <div className="card-body">
-                    <h5 className="card-title text-white">{movie.title}</h5>
-                    <p className="card-text">
-                    {movie.genres.split('|').map((genre, index) => (
-                        <span key={index} className="badge bg-light text-dark me-1">{genre}</span>
-                    ))}
-                    </p>
-                    
-
-                    </div>
-                </div>
-                </div>
-            ))}
-            </div>
-        </div> */}
-            
-        {/* Filtered Movies */}
-        <div className="row">
-    {getPaginatedMovies().map(movie => (
-      <div key={movie.movieId} className="col-md-3 mb-4" onClick={() => handleMovieClick(movie.movieId)}>
-        <div className="card bg-secondary text-light rounded-lg shadow-sm" style={{ minHeight: '350px' }}>
-          <img 
-            src={posterUrls[movie.movieId] || 'fallback.jpg'} 
-            alt={movie.title} 
-            className="card-img-top rounded-top" 
-            style={{ maxHeight: '200px', objectFit: 'cover' }} 
-          />
-          <div className="card-body">
-            <h5 className="card-title text-white">{movie.title}</h5>
-            <p className="card-text">
-            {movie.genres.split('|').map((genre, index) => (
-                <span key={index} className="badge bg-light text-dark me-1">{genre}</span>
-            ))}
-            </p>
-
           </div>
         </div>
       </div>
     ))}
   </div>
 
+  {/* Pagination */}
+  <nav 
+    aria-label="Page navigation" 
+    className="mt-5"
+    style={{ animation: 'fadeIn 1s ease-out 0.8s both' }}
+  >
+    <ul className="pagination justify-content-center">
+      <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+        <button 
+          className="page-link border-0 rounded-pill me-2"
+          onClick={() => handlePageChange(currentPage - 1)}
+          style={{ 
+            background: 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)',
+            color: 'white',
+            padding: '10px 20px',
+            transition: 'all 0.3s ease',
+            backdropFilter: 'blur(10px)'
+          }}
+          onMouseEnter={(e) => {
+            if (currentPage !== 1) {
+              e.target.style.background = 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)';
+              e.target.style.transform = 'translateY(-2px)';
+              e.target.style.boxShadow = '0 5px 15px rgba(52, 152, 219, 0.3)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (currentPage !== 1) {
+              e.target.style.background = 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)';
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = 'none';
+            }
+          }}
+        >
+          <i className="bi bi-chevron-left me-1"></i>
+          Previous
+        </button>
+      </li>
+      
+      {getPaginationItems().map((page, index) => (
+        <li key={index} className={`page-item ${currentPage === page ? 'active' : ''}`}>
+          <button 
+            className="page-link border-0 rounded-circle me-2"
+            onClick={() => page !== '...' && handlePageChange(page)}
+            style={{ 
+              background: currentPage === page 
+                ? 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)'
+                : 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)',
+              color: 'white',
+              width: '45px',
+              height: '45px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'all 0.3s ease',
+              backdropFilter: 'blur(10px)',
+              fontWeight: currentPage === page ? 'bold' : 'normal'
+            }}
+            onMouseEnter={(e) => {
+              if (page !== '...' && currentPage !== page) {
+                e.target.style.background = 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)';
+                e.target.style.transform = 'translateY(-2px) scale(1.1)';
+                e.target.style.boxShadow = '0 5px 15px rgba(52, 152, 219, 0.3)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (page !== '...' && currentPage !== page) {
+                e.target.style.background = 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)';
+                e.target.style.transform = 'translateY(0) scale(1)';
+                e.target.style.boxShadow = 'none';
+              }
+            }}
+          >
+            {page}
+          </button>
+        </li>
+      ))}
+      
+      <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+        <button 
+          className="page-link border-0 rounded-pill"
+          onClick={() => handlePageChange(currentPage + 1)}
+          style={{ 
+            background: 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)',
+            color: 'white',
+            padding: '10px 20px',
+            transition: 'all 0.3s ease',
+            backdropFilter: 'blur(10px)'
+          }}
+          onMouseEnter={(e) => {
+            if (currentPage !== totalPages) {
+              e.target.style.background = 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)';
+              e.target.style.transform = 'translateY(-2px)';
+              e.target.style.boxShadow = '0 5px 15px rgba(52, 152, 219, 0.3)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (currentPage !== totalPages) {
+              e.target.style.background = 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)';
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = 'none';
+            }
+          }}
+        >
+          Next
+          <i className="bi bi-chevron-right ms-1"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
 
+  {/* Modal for Movie Details */}
+  <MovieDetail movieId={selectedMovieId} show={showDetail} onClose={handleCloseModal} />
 
-        {/* Pagination */}
-        <nav aria-label="Page navigation example">
-            <ul className="pagination justify-content-center">
-            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                <button className="page-link" onClick={() => handlePageChange(currentPage - 1)} style={{ backgroundColor: '#2c3e50', color: 'white' }}>Previous</button>
-            </li>
-            {getPaginationItems().map((page, index) => (
-                <li key={index} className={`page-item ${currentPage === page ? 'active' : ''}`}>
-                <button className="page-link" onClick={() => page !== '...' && handlePageChange(page)} style={{ backgroundColor: '#2c3e50', color: 'white' }}>
-                    {page}
-                </button>
-                </li>
-            ))}
-            <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                <button className="page-link" onClick={() => handlePageChange(currentPage + 1)} style={{ backgroundColor: '#2c3e50', color: 'white' }}>Next</button>
-            </li>
-            </ul>
-        </nav>
-            
-        {/* Modal for Movie Details */}
-        <MovieDetail movieId={selectedMovieId} show={showDetail} onClose={handleCloseModal} />
-        </div>
+  <style jsx>{`
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .page-item.disabled .page-link {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .page-item.disabled .page-link:hover {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .card:hover .card-img-top {
+      transform: scale(1.1);
+    }
+
+    .pagination .page-link {
+      margin: 0 2px;
+    }
+
+    select option {
+      background-color: #2c3e50 !important;
+      color: white !important;
+    }
+
+    select option:hover {
+      background-color: #34495e !important;
+    }
+  `}</style>
+</div>
     );
 };
 
