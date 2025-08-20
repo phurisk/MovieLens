@@ -14,7 +14,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", builder =>
     {
-        builder.WithOrigins("http://localhost:3000") // ที่อยู่ของ React (Frontend)
+        builder.WithOrigins("http://localhost:3000","https://movie-lens-phudev.vercel.app") // ที่อยู่ของ React (Frontend)
                .AllowAnyMethod()   // อนุญาตทุก HTTP method
                .AllowAnyHeader();  // อนุญาตทุก Header
     });
