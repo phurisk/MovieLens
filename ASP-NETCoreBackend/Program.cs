@@ -25,21 +25,37 @@ builder.Services.AddControllers(); // เพิ่มการสนับสน
 
 var app = builder.Build();
 
-
+//### เพิ่ม ###
 var port = Environment.GetEnvironmentVariable("PORT");
-if (!string.IsNullOrEmpty(port))
+if (!string.IsNullOrEmpty(port) && int.TryParse(port, out var portNumber))
 {
     app.Urls.Clear();
-    app.Urls.Add($"http://*:{port}");
+    app.Urls.Add($"http://*:{portNumber}");
 }
+
+//### เพิ่ม ###
+var dataPath = Path.Combine(Directory.GetCurrentDirectory(), "Data");
+if (Directory.Exists(dataPath))
+{
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(dataPath),
+        RequestPath = "/Data"
+    });
+}
+
 
 // ให้บริการไฟล์ Static (ไฟล์ CSV)
 app.UseStaticFiles(); // ให้บริการไฟล์ static ทั่วไป
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Data")),
-    RequestPath = "/Data"
-});
+
+
+// app.UseStaticFiles(new StaticFileOptions
+// {
+//     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Data")),
+//     RequestPath = "/Data"
+// });
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
