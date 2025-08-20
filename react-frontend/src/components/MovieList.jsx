@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MovieDetail from './MovieDetail';
 
 
+const API_BASE = process.env.REACT_APP_API_BASE;
 
 const MovieList = () => {
     const [movies, setMovies] = useState([]);
@@ -20,7 +21,7 @@ const MovieList = () => {
 
     useEffect(() => {
         // ดึงข้อมูลหนังทั้งหมด
-        fetch('http://localhost:5246/api/movie')
+        fetch(`${API_BASE}/api/movie`)
             .then(response => response.json())
             .then(data => {
                 // ตั้งค่าหนังทั้งหมด
@@ -32,7 +33,7 @@ const MovieList = () => {
             });
 
         // ดึงข้อมูล links (tmdbId) สำหรับแต่ละหนัง
-        fetch('http://localhost:5246/api/movie/links')
+        fetch(`${API_BASE}/api/movie/links`)
             .then(response => response.json())
             .then(data => {
                 setMovieLinks(data);  // เก็บข้อมูล links ไว้ใน state

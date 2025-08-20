@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Card, Row, Col } from 'react-bootstrap';
 
+
+const API_BASE = process.env.REACT_APP_API_BASE;
+
 const MovieDetail = ({ movieId, show, onClose }) => {
     const [movie, setMovie] = useState(null);
     const [ratings, setRatings] = useState([]);
@@ -18,18 +21,18 @@ const MovieDetail = ({ movieId, show, onClose }) => {
     
                 try {
                     // Movie
-                    const movieRes = await fetch(`http://localhost:5246/api/movie/${movieId}`);
+                    const movieRes = await fetch(`${API_BASE}/api/movie/${movieId}`);
                     if (movieRes.status === 404) throw new Error('Movie not found');
                     const movieData = await movieRes.json();
                     setMovie(movieData);
     
                     // Ratings
-                    const ratingRes = await fetch(`http://localhost:5246/api/movie/ratings`);
+                    const ratingRes = await fetch(`${API_BASE}/api/movie/ratings`);
                     const allRatings = await ratingRes.json();
                     setRatings(allRatings.filter(r => r.movieId === movieId));
     
                     // Image from TMDb
-                    const linkRes = await fetch(`http://localhost:5246/api/movie/links`);
+                    const linkRes = await fetch(`${API_BASE}/api/movie/links`);
                     const links = await linkRes.json();
                     const link = links.find(link => link.movieId === movieId);
                     if (link?.tmdbId) {
