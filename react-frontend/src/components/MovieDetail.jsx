@@ -3,6 +3,7 @@ import { Modal, Button, Card, Row, Col } from 'react-bootstrap';
 
 
 const API_BASE = process.env.REACT_APP_API_BASE;
+console.log("API Base:", process.env.REACT_APP_API_BASE);
 
 const MovieDetail = ({ movieId, show, onClose }) => {
     const [movie, setMovie] = useState(null);

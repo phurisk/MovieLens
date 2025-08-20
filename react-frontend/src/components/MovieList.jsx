@@ -3,6 +3,7 @@ import MovieDetail from './MovieDetail';
 
 
 const API_BASE = process.env.REACT_APP_API_BASE;
+console.log("API Base:", process.env.REACT_APP_API_BASE);
 
 const MovieList = () => {
     const [movies, setMovies] = useState([]);
