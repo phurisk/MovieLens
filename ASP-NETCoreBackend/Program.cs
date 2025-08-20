@@ -25,6 +25,14 @@ builder.Services.AddControllers(); // เพิ่มการสนับสน
 
 var app = builder.Build();
 
+
+var port = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(port))
+{
+    app.Urls.Clear();
+    app.Urls.Add($"http://*:{port}");
+}
+
 // ให้บริการไฟล์ Static (ไฟล์ CSV)
 app.UseStaticFiles(); // ให้บริการไฟล์ static ทั่วไป
 app.UseStaticFiles(new StaticFileOptions
